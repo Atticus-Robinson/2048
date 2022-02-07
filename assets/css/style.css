@@ -20,9 +20,6 @@ html, body {
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: var(--cream);
 }
 
@@ -31,16 +28,27 @@ body {
     right: 90vw;
 }
 
-main {
+.background, .tile-container {
     box-sizing: border-box;
     height: 600px;
     width: 600px;
-    background-color: var(--brown);
     border-radius: 0.25rem;
     display: flex;
     padding: 20px;
     gap: 20px;
     flex-wrap: wrap;
+    position: absolute;
+    left: 25%;
+    top: 2%;
+}
+
+.background {
+    background-color: var(--brown);
+    z-index: 1;
+}
+
+.tile-container {
+    z-index: 2;
     font-family: 'Mukta', sans-serif;
 }
 
@@ -61,6 +69,22 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition-duration: 0.5s;
+}
+
+.addedClass {
+    width: 140px;
+    height: 140px;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 ._2-tile {
@@ -106,3 +130,4 @@ main {
 ._2048-tile {
 
 }
+
