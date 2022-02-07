@@ -1,14 +1,13 @@
 //ANIMATION TESTING
-import 'animate.css';
+const animated = document.querySelector(".number-tile");
+
+
 
 $(function () {
-  $("#test-animation")
-    .on("click", function () {
-      $(".number-tile").addClass("animate");
-      $(".number-tile").removeClass("animate");
-    })
-    .on("animationend", function () {
-      console.log("test");
-      $(".number-tile").removeClass("animate");
-    });
+  $("#test-animation").on("click", function () {
+    $(".number-tile").addClass("animate__animated animate__pulse");
+  });
+  animated.onanimationend = () => {
+    $(".number-tile").removeClass("animate__animated animate__pulse");
+  };
 });

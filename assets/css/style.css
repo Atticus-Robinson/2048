@@ -71,23 +71,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    animation-duration: 0.1s;
+    animation-duration: 0.3s;
     z-index: 4;
     color: aliceblue;
-}
-
-.animate {
-    animation: pop 0.1s;
-}
-
-@keyframes pop {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.1);
-    }
 }
 
 ._2-tile {
