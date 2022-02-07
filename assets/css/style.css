@@ -1,13 +1,46 @@
 :root {
-    --cream: rgb(250,248,239);
-    --brown: rgb(187,173,160);
-    --stone: rgb(205,193,180);
-    --cyan: rgb(84,130,120);
-    --red: rgb(194,104,96);
-    --sienna: rgb(195,120,97);
-    --orange: rgb(199,146,106);
-    --yellow: rgb(200,166,105);
-    --blue: rgb(142,168,214);
-    --purple: rgb(186,179,228);
-    /*Need 4 More*/
+  --cream: rgb(250, 248, 239);
+  --brown: rgb(187, 173, 160);
+  --stone: rgb(205, 193, 180);
+  --cyan: rgb(84, 130, 120);
+  --red: rgb(194, 104, 96);
+  --sienna: rgb(195, 120, 97);
+  --orange: rgb(199, 146, 106);
+  --yellow: rgb(200, 166, 105);
+  --blue: rgb(142, 168, 214);
+  --purple: rgb(186, 179, 228);
+  /*Need 4 More*/
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cream);
+}
+
+main {
+    box-sizing: border-box;
+    height: 600px;
+    width: 600px;
+    background-color: var(--brown);
+    border-radius: 0.25rem;
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.empty-tile {
+    background-color: var(--stone);
+    border-radius: 0.25rem;
+    width: 125px;
+    height: 125px;
 }
