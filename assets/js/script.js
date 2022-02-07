@@ -1,8 +1,6 @@
 //ANIMATION TESTING
 const animated = document.querySelector(".number-tile");
 
-
-
 $(function () {
   $("#test-animation").on("click", function () {
     $(".number-tile").addClass("animate__animated animate__pulse");
