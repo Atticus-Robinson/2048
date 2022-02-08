@@ -12,92 +12,91 @@
   /*Need 4 More*/
 }
 
-html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--cream);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--cream);
 }
 
-main {
-    box-sizing: border-box;
-    height: 600px;
-    width: 600px;
-    background-color: var(--brown);
-    border-radius: 0.25rem;
-    display: flex;
-    padding: 20px;
-    gap: 20px;
-    flex-wrap: wrap;
-    font-family: 'Mukta', sans-serif;
+.container {
+  box-sizing: border-box;
+  height: 600px;
+  width: 600px;
+  background-color: var(--brown);
+  border-radius: 0.25rem;
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-family: "Mukta", sans-serif;
+  /* temporary */
+  background-color: antiquewhite;
 }
 
 .empty-tile {
-    background-color: var(--stone);
-    border-radius: 0.25rem;
-    width: 125px;
-    height: 125px;
-    z-index: 1;
+  background-color: var(--stone);
+  border-radius: 0.25rem;
+  width: 125px;
+  height: 125px;
+  z-index: 1;
 }
 
 .number-tile {
-    width: 125px;
-    height: 125px;
-    border-radius: 0.25rem;
-    font-weight: 500;
-    font-size: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 125px;
+  height: 125px;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 ._2-tile {
-    background-color: var(--purple);
+  background-color: var(--purple);
 }
 
 ._4-tile {
-    background-color: var(--blue);
+  background-color: var(--blue);
 }
 
 ._8-tile {
-    background-color: var(--cyan);
+  background-color: var(--cyan);
 }
 
 ._16-tile {
-    background-color: var(--red);
+  background-color: var(--red);
 }
 
 ._32-tile {
-    background-color: var(--sienna);
+  background-color: var(--sienna);
 }
 
 ._64-tile {
-    background-color: var(--orange);
+  background-color: var(--orange);
 }
 
 ._128-tile {
-    background-color: var(--yellow);
+  background-color: var(--yellow);
 }
 
 ._256-tile {
-
 }
 
 ._512-tile {
-
 }
 
 ._1024-tile {
-
 }
 
 ._2048-tile {
-
 }
