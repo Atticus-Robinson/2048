@@ -32,4 +32,46 @@ const generateNumber = () => {
   }
 };
 
+/* Handles the captured keydown events and only uses arrow keys */
+/* 37 = ArrowLeft, 38 = ArrowUp, 39 = ArrowRight, 40 = ArrowDown */
+const keyPressed = (e) => {
+  if (e.keyCode > 36 && e.keyCode < 41) {
+    const pressedKey = e.keyCode;
+    switch (pressedKey) {
+      case 37:
+        leftMovHandler();
+        break;
+      case 38:
+        upMovHandler();
+        break;
+      case 39:
+        rightMovHandler();
+        break;
+      case 40:
+        downMovHandler();
+        break;
+    }
+  }
+};
+
+const leftMovHandler = () => {
+  console.log("Left");
+};
+
+const rightMovHandler = () => {
+  console.log("Right");
+};
+
+const upMovHandler = () => {
+  console.log("Up");
+};
+
+const downMovHandler = () => {
+  console.log("Down");
+};
+
+/* Captures keydown events */
+$(window).on("keydown", keyPressed);
+
+/* Launches the game on load */
 startGame();
