@@ -6,6 +6,9 @@ const tileEl = $(".tile");
 /* An array to hold the tiles */
 const tiles = [];
 
+/* Keeps track of whether a move happened */
+let moved = 0;
+
 /* Starts the game and generates two starting numbers */
 const startGame = () => {
   createTilesArray();
@@ -34,6 +37,12 @@ const generateNumber = () => {
 /* Handles the captured keydown events and only uses arrow keys */
 /* 37 = ArrowLeft, 38 = ArrowUp, 39 = ArrowRight, 40 = ArrowDown */
 const keyPressed = (e) => {
+  /* Removes the locked status from the tiles */
+  tiles.forEach(function (tile) {
+    tile.removeClass("locked");
+  });
+
+  /* Switch statement that handles which key was pressed */
   if (e.keyCode > 36 && e.keyCode < 41) {
     const pressedKey = e.keyCode;
     switch (pressedKey) {
@@ -57,21 +66,34 @@ const rightMovHandler = () => {
   console.log("Right");
   /* Directional number: how the numbers need to be shifted */
   const dirNum = -1;
-  for (let i = 3; i > 0; i += dirNum) {
-    let tile = tiles[i].text();
-    let secondaryTile = tiles[i + dirNum].text();
 
-    if (!tile) {
-      tile = secondaryTile;
-      secondaryTile = "";
-      if (tile) {
-        emptyTile(tile, i, dirNum);
+  for (row = 0; row < 4; row++) {
+    for (let count = 1; count <= 4; count++) {
+      for (let i = 3 + row * 4; i > 0 + row * 4; i += dirNum) {
+        let tile = tiles[i].text();
+        let secondaryTile = tiles[i + dirNum].text();
+
+        /* Handles the inner workings of the tiles */
+        if (!tile) {
+          /* If there is no number in the primary tile */
+          tile = secondaryTile;
+          secondaryTile = "";
+          if (tile) {
+            emptyTile(tile, i, dirNum);
+          }
+        } else if (tile === secondaryTile && !tiles[i].hasClass("locked")) {
+          /* When there are matching numbers in primary and secondary tiles */
+          tile = parseInt(tile) + parseInt(secondaryTile);
+          secondaryTile = "";
+          combineTiles(tile, i, dirNum);
+        }
       }
-    } else if (tile === secondaryTile) {
-      tile = parseInt(tile) + parseInt(secondaryTile);
-      secondaryTile = "";
-      combineTiles(tile, i, dirNum);
     }
+  }
+
+  if (moved) {
+    generateNumber();
+    moved = 0;
   }
 };
 
@@ -135,17 +157,21 @@ const emptyTile = (tileContents, index, dirNum) => {
 
   /* Empties the secondary tile and removes class */
   tiles[index + dirNum].empty().removeClass(`_${tileContents}-tile`);
+
+  moved++;
 };
 
 const combineTiles = (tileContents, index, dirNum) => {
   /* Combines the primary tile and the secondary tile and manages classes */
   tiles[index]
     .text(tileContents)
-    .addClass(`_${tileContents}-tile`)
+    .addClass(`_${tileContents}-tile locked`)
     .removeClass(`_${tileContents / 2}-tile`);
 
   /* Empties the secondary tile and removes the class*/
   tiles[index + dirNum].empty().removeClass(`_${tileContents / 2}-tile`);
+
+  moved++;
 };
 
 /* Captures keydown events */
