@@ -13,8 +13,8 @@ let gameOver = false;
 /* Starts the game and generates two starting numbers */
 const startGame = () => {
   createTilesArray();
-  /* generateNumber();
-  generateNumber(); */
+  generateNumber();
+  generateNumber();
 };
 
 /* Creates an array containing each of the tiles */
@@ -26,10 +26,17 @@ const createTilesArray = () => {
 
 /* Logic for generating a random number */
 const generateNumber = () => {
-  randomNumber = Math.floor(Math.random() * tiles.length);
+  randomNumber = Math.floor(Math.random() * 16);
+
+  /* Checks if the tile is empty */
   if (!tiles[randomNumber].text()) {
-    tiles[randomNumber].text(2);
-    tiles[randomNumber].addClass("_2-tile");
+    /* There is a 10% chance to get a four */
+    const numbers = [2, 2, 2, 2, 2, 2, 2, 2, 2, 4];
+    /* Grabs a random number */
+    let number = numbers[Math.floor(Math.random() * 10)];
+    /* Adds the number to the tile */
+    tiles[randomNumber].text(number);
+    tiles[randomNumber].addClass(`_${number}-tile`);
   } else {
     generateNumber();
   }
@@ -80,7 +87,6 @@ const keyPressed = (e) => {
 };
 
 const rightMovHandler = () => {
-  console.log("Right");
   /* Directional number: how the numbers need to be shifted */
   const dirNum = -1;
 
@@ -122,7 +128,6 @@ const rightMovHandler = () => {
 };
 
 const leftMovHandler = () => {
-  console.log("Left");
   const dirNum = 1;
 
   for (row = 0; row < 4; row++) {
@@ -161,7 +166,6 @@ const leftMovHandler = () => {
 };
 
 const upMovHandler = () => {
-  console.log("Up");
   const dirNum = 4;
 
   for (column = 0; column < 4; column++) {
@@ -200,7 +204,6 @@ const upMovHandler = () => {
 };
 
 const downMovHandler = () => {
-  console.log("Down");
   const dirNum = -4;
 
   for (column = 0; column < 4; column++) {
