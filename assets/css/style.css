@@ -1,51 +1,55 @@
 :root {
-  --cream: rgb(250, 248, 239);
-  --brown: rgb(187, 173, 160);
-  --stone: rgb(205, 193, 180);
-  --cyan: rgb(84, 130, 120);
-  --red: rgb(194, 104, 96);
-  --sienna: rgb(195, 120, 97);
-  --orange: rgb(199, 146, 106);
-  --yellow: rgb(200, 166, 105);
-  --blue: rgb(142, 168, 214);
-  --purple: rgb(186, 179, 228);
-  /*Need 4 More*/
+  --yellow: #ffe443;
+  --green: #d0dd28;
+  --sky: #82a3f8;
+  --water: #5984f6;
+  --orange: #fbad18;
+  --red: #f26647;
+  --pink: #da386c;
+  --purple: #ab218e;
+  --dpurple: #662d91;
+  --slate: #4c52a3;
+  --dblue: #1f2b7b;
 }
 
 html,
 body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
+  background-color: rgb(219, 225, 221);
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--cream);
+#test-animation {
+  position: absolute;
+  right: 90vw;
 }
 
-.container {
+.background,
+.tile-container {
   box-sizing: border-box;
   height: 600px;
   width: 600px;
-  background-color: var(--brown);
   border-radius: 0.25rem;
   display: flex;
   padding: 20px;
-  gap: 20px;
   flex-wrap: wrap;
-  font-family: "Mukta", sans-serif;
-  /* Temporary */
-  background-color: antiquewhite;
+  position: absolute;
+  left: 25%;
+  top: 2%;
+  justify-content: space-around;
+  align-content: space-around;
 }
 
-/* Merged empty and number tiles since the 
-background down the list takes precedence anyway */
+.background {
+  background-color: darkgray;
+  z-index: 1;
+}
+
+.tile-container {
+  z-index: 2;
+  font-family: "Mukta", sans-serif;
+}
+
 .tile {
-  background-color: var(--stone);
+  background-color: rgb(227, 218, 201);
   border-radius: 0.25rem;
   width: 125px;
   height: 125px;
@@ -54,44 +58,53 @@ background down the list takes precedence anyway */
   display: flex;
   align-items: center;
   justify-content: center;
+  animation-duration: 0.3s;
+  z-index: 4;
+  color: aliceblue;
 }
 
 ._2-tile {
-  background-color: var(--purple);
+  background-color: var(--yellow);
+  color: black;
 }
 
 ._4-tile {
-  background-color: var(--blue);
+  background-color: var(--green);
+  color: black;
 }
 
 ._8-tile {
-  background-color: var(--cyan);
+  background-color: var(--sky);
 }
 
 ._16-tile {
-  background-color: var(--red);
+  background-color: var(--water);
 }
 
 ._32-tile {
-  background-color: var(--sienna);
-}
-
-._64-tile {
   background-color: var(--orange);
 }
 
+._64-tile {
+  background-color: var(--red);
+}
+
 ._128-tile {
-  background-color: var(--yellow);
+  background-color: var(--pink);
 }
 
 ._256-tile {
+  background-color: var(--purple);
 }
 
 ._512-tile {
+  background-color: var(--dpurple);
 }
 
 ._1024-tile {
+  background-color: var(--slate);
 }
 
 ._2048-tile {
+  background-color: var(--dblue);
 }

@@ -1,5 +1,4 @@
 /* Selectors */
-const containerDisplay = $(".container");
 const scoreDisplay = $(".score");
 const tileEl = $(".tile");
 
