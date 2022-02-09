@@ -81,7 +81,11 @@ const rightMovHandler = () => {
           if (tile) {
             emptyTile(tile, i, dirNum);
           }
-        } else if (tile === secondaryTile && !tiles[i].hasClass("locked")) {
+        } else if (
+          tile === secondaryTile &&
+          !tiles[i].hasClass("locked") &&
+          !tiles[i + dirNum].hasClass("locked")
+        ) {
           /* When there are matching numbers in primary and secondary tiles */
           tile = parseInt(tile) + parseInt(secondaryTile);
           secondaryTile = "";
@@ -101,17 +105,35 @@ const leftMovHandler = () => {
   console.log("Left");
   const dirNum = 1;
 
-  for (let i = 0; i < 3; i += dirNum) {
-    let tile = tiles[i].text();
-    let secondaryTile = tiles[i + dirNum].text();
+  for (row = 0; row < 4; row++) {
+    for (let count = 1; count <= 4; count++) {
+      for (let i = 0 + row * 4; i < 3 + row * 4; i += dirNum) {
+        let tile = tiles[i].text();
+        let secondaryTile = tiles[i + dirNum].text();
 
-    if (!tile) {
-      tile = secondaryTile;
-      secondaryTile = "";
-      if (tile) {
-        emptyTile(tile, i, dirNum);
+        if (!tile) {
+          tile = secondaryTile;
+          secondaryTile = "";
+          if (tile) {
+            emptyTile(tile, i, dirNum);
+          }
+        } else if (
+          tile === secondaryTile &&
+          !tiles[i].hasClass("locked") &&
+          !tiles[i + dirNum].hasClass("locked")
+        ) {
+          /* When there are matching numbers in primary and secondary tiles */
+          tile = parseInt(tile) + parseInt(secondaryTile);
+          secondaryTile = "";
+          combineTiles(tile, i, dirNum);
+        }
       }
     }
+  }
+
+  if (moved) {
+    generateNumber();
+    moved = 0;
   }
 };
 
@@ -119,17 +141,35 @@ const upMovHandler = () => {
   console.log("Up");
   const dirNum = 4;
 
-  for (let i = 0; i < 12; i += dirNum) {
-    let tile = tiles[i].text();
-    let secondaryTile = tiles[i + dirNum].text();
+  for (column = 0; column < 4; column++) {
+    for (let count = 1; count <= 4; count++) {
+      for (let i = 0 + column; i < 12; i += dirNum) {
+        let tile = tiles[i].text();
+        let secondaryTile = tiles[i + dirNum].text();
 
-    if (!tile) {
-      tile = secondaryTile;
-      secondaryTile = "";
-      if (tile) {
-        emptyTile(tile, i, dirNum);
+        if (!tile) {
+          tile = secondaryTile;
+          secondaryTile = "";
+          if (tile) {
+            emptyTile(tile, i, dirNum);
+          }
+        } else if (
+          tile === secondaryTile &&
+          !tiles[i].hasClass("locked") &&
+          !tiles[i + dirNum].hasClass("locked")
+        ) {
+          /* When there are matching numbers in primary and secondary tiles */
+          tile = parseInt(tile) + parseInt(secondaryTile);
+          secondaryTile = "";
+          combineTiles(tile, i, dirNum);
+        }
       }
     }
+  }
+
+  if (moved) {
+    generateNumber();
+    moved = 0;
   }
 };
 
@@ -137,17 +177,35 @@ const downMovHandler = () => {
   console.log("Down");
   const dirNum = -4;
 
-  for (let i = 12; i > 0; i += dirNum) {
-    let tile = tiles[i].text();
-    let secondaryTile = tiles[i + dirNum].text();
+  for (column = 0; column < 4; column++) {
+    for (let count = 1; count <= 4; count++) {
+      for (let i = 12 + column; i > 3; i += dirNum) {
+        let tile = tiles[i].text();
+        let secondaryTile = tiles[i + dirNum].text();
 
-    if (!tile) {
-      tile = secondaryTile;
-      secondaryTile = "";
-      if (tile) {
-        emptyTile(tile, i, dirNum);
+        if (!tile) {
+          tile = secondaryTile;
+          secondaryTile = "";
+          if (tile) {
+            emptyTile(tile, i, dirNum);
+          }
+        } else if (
+          tile === secondaryTile &&
+          !tiles[i].hasClass("locked") &&
+          !tiles[i + dirNum].hasClass("locked")
+        ) {
+          /* When there are matching numbers in primary and secondary tiles */
+          tile = parseInt(tile) + parseInt(secondaryTile);
+          secondaryTile = "";
+          combineTiles(tile, i, dirNum);
+        }
       }
     }
+  }
+
+  if (moved) {
+    generateNumber();
+    moved = 0;
   }
 };
 
