@@ -4,6 +4,12 @@ const tileEl = $(".tile");
 
 /* An array to hold the tiles */
 const tiles = [];
+const grid = [
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+];
 /* Keeps track of whether a move happened */
 let moved = 0;
 /* Keeps track of game state */
@@ -95,6 +101,7 @@ const rightMovHandler = () => {
         let tile = tiles[i].text();
         let secondaryTile = tiles[i + dirNum].text();
 
+        //Secondary tile is source tile. Tile is destination
         /* Handles the inner workings of the tiles */
         if (!tile) {
           /* If there is no number in the primary tile */
@@ -241,8 +248,13 @@ const downMovHandler = () => {
 };
 
 const emptyTile = (tileContents, index, dirNum) => {
+  slide(i, dirNum)
+  console.log("empty run");
   /* Assigns primary tile the number from the secondary tile and adds a class */
-  tiles[index].text(tileContents).addClass(`_${tileContents}-tile`);
+  tiles[index]
+    .attr("id", index)
+    .text(tileContents)
+    .addClass(`_${tileContents}-tile`);
 
   /* Empties the secondary tile and removes class */
   tiles[index + dirNum].empty().removeClass(`_${tileContents}-tile`);
@@ -334,8 +346,26 @@ const checkIfWon = () => {
   });
 };
 
+let slide = async(index, dirNum) => {
+  console.log("slide run");
+  let from = index + dirNum;
+  let item = $(tiles)[index];
+  let [x, y] = [0, 0];
+  if (Math.abs(dirNum) == 4) {
+    y = dirNum * -34.25;
+  } else if (Math.abs(dirNum) == 1) {
+    x = dirNum * -137;
+  }
+  console.log(x, y);
+  $(item).transition({ x: `${x}px`, y: `${y}px` });
+};
+
 /* Captures keydown events */
 $(window).on("keydown", keyPressed);
+
+$("#test-animation").on("click", function () {
+  $(".tile").transition({ y: "137px" });
+});
 
 /* Launches the game on load */
 startGame();

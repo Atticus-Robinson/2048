@@ -17,11 +17,6 @@ body {
   background-color: rgb(219, 225, 221);
 }
 
-#test-animation {
-  position: absolute;
-  right: 90vw;
-}
-
 .background,
 .tile-container {
   box-sizing: border-box;
@@ -34,8 +29,8 @@ body {
   position: absolute;
   left: 25%;
   top: 2%;
-  justify-content: space-around;
-  align-content: space-around;
+  justify-content: space-evenly;
+  align-content: space-evenly;
 }
 
 .background {
@@ -49,7 +44,6 @@ body {
 }
 
 .tile {
-  background-color: rgb(227, 218, 201);
   border-radius: 0.25rem;
   width: 125px;
   height: 125px;
@@ -58,9 +52,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation-duration: 0.3s;
   z-index: 4;
+  transition: transform 0.3s ease-in-out;
   color: aliceblue;
+}
+
+.background-tile {
+  background-color: rgb(227, 218, 201);
+  border-radius: 0.25rem;
+  width: 125px;
+  height: 125px;
+  z-index: 1;
 }
 
 ._2-tile {
