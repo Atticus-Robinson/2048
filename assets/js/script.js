@@ -9,8 +9,8 @@ const tiles = [];
 /* Starts the game and generates two starting numbers */
 const startGame = () => {
   createTilesArray();
-  generateNumber();
-  generateNumber();
+  /* generateNumber();
+  generateNumber(); */
 };
 
 /* Creates an array containing each of the tiles */
@@ -58,13 +58,13 @@ const rightMovHandler = () => {
   /* Directional number: how the numbers need to be shifted */
   const dirNum = -1;
 
-  for (let i = 3; i > 0; i--) {
+  for (let i = 3; i > 0; i += dirNum) {
     let tile = tiles[i].text();
-    let sideTile = tiles[i - 1].text();
+    let secondaryTile = tiles[i + dirNum].text();
 
     if (!tile) {
-      tile = sideTile;
-      sideTile = "";
+      tile = secondaryTile;
+      secondaryTile = "";
       if (tile) {
         emptyTileHandler(tile, i, dirNum);
       }
@@ -76,13 +76,13 @@ const leftMovHandler = () => {
   console.log("Left");
   const dirNum = 1;
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i += dirNum) {
     let tile = tiles[i].text();
-    let sideTile = tiles[i + 1].text();
+    let secondaryTile = tiles[i + dirNum].text();
 
     if (!tile) {
-      tile = sideTile;
-      sideTile = "";
+      tile = secondaryTile;
+      secondaryTile = "";
       if (tile) {
         emptyTileHandler(tile, i, dirNum);
       }
@@ -92,10 +92,38 @@ const leftMovHandler = () => {
 
 const upMovHandler = () => {
   console.log("Up");
+  const dirNum = 4;
+
+  for (let i = 0; i < 12; i += dirNum) {
+    let tile = tiles[i].text();
+    let secondaryTile = tiles[i + dirNum].text();
+
+    if (!tile) {
+      tile = secondaryTile;
+      secondaryTile = "";
+      if (tile) {
+        emptyTileHandler(tile, i, dirNum);
+      }
+    }
+  }
 };
 
 const downMovHandler = () => {
   console.log("Down");
+  const dirNum = -4;
+
+  for (let i = 12; i > 0; i += dirNum) {
+    let tile = tiles[i].text();
+    let secondaryTile = tiles[i + dirNum].text();
+
+    if (!tile) {
+      tile = secondaryTile;
+      secondaryTile = "";
+      if (tile) {
+        emptyTileHandler(tile, i, dirNum);
+      }
+    }
+  }
 };
 
 const emptyTileHandler = (tileContents, index, dirNum) => {
