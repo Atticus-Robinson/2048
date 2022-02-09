@@ -5,9 +5,10 @@ const tileEl = $(".tile");
 
 /* An array to hold the tiles */
 const tiles = [];
-
 /* Keeps track of whether a move happened */
 let moved = 0;
+/* Keeps track of game state */
+let gameOver = false;
 
 /* Starts the game and generates two starting numbers */
 const startGame = () => {
@@ -37,6 +38,22 @@ const generateNumber = () => {
 /* Handles the captured keydown events and only uses arrow keys */
 /* 37 = ArrowLeft, 38 = ArrowUp, 39 = ArrowRight, 40 = ArrowDown */
 const keyPressed = (e) => {
+  /* Checks and handles the game being over */
+  if (gameOver) {
+    let score = 0;
+
+    /* Finds the highest number on the board */
+    tiles.forEach(function (tile) {
+      if (parseInt(tile.text()) > score) {
+        score = tile.text();
+      }
+    });
+
+    /* Puts the score on the screen */
+    scoreDisplay.text(score);
+    return;
+  }
+
   /* Removes the locked status from the tiles */
   tiles.forEach(function (tile) {
     tile.removeClass("locked");
@@ -99,6 +116,9 @@ const rightMovHandler = () => {
     generateNumber();
     moved = 0;
   }
+
+  checkEndGame();
+  checkIfWon();
 };
 
 const leftMovHandler = () => {
@@ -135,6 +155,9 @@ const leftMovHandler = () => {
     generateNumber();
     moved = 0;
   }
+
+  checkEndGame();
+  checkIfWon();
 };
 
 const upMovHandler = () => {
@@ -171,6 +194,9 @@ const upMovHandler = () => {
     generateNumber();
     moved = 0;
   }
+
+  checkEndGame();
+  checkIfWon();
 };
 
 const downMovHandler = () => {
@@ -207,6 +233,9 @@ const downMovHandler = () => {
     generateNumber();
     moved = 0;
   }
+
+  checkEndGame();
+  checkIfWon();
 };
 
 const emptyTile = (tileContents, index, dirNum) => {
@@ -230,6 +259,77 @@ const combineTiles = (tileContents, index, dirNum) => {
   tiles[index + dirNum].empty().removeClass(`_${tileContents / 2}-tile`);
 
   moved++;
+};
+
+const checkEndGame = () => {
+  let emptySpaces = 0;
+  let movesLeft = 0;
+
+  tiles.forEach(function (tile) {
+    if (tile.text() === "") {
+      emptySpaces++;
+    }
+  });
+
+  if (!emptySpaces) {
+    for (line = 0; line < 4; line++) {
+      for (let count = 1; count <= 4; count++) {
+        let dirNum = -1;
+        for (let i = 3 + line * 4; i > 0 + line * 4; i += dirNum) {
+          let tile = tiles[i].text();
+          let secondaryTile = tiles[i + dirNum].text();
+
+          if (tile === secondaryTile) {
+            movesLeft++;
+          }
+        }
+
+        dirNum = 1;
+        for (let i = 0 + line * 4; i < 3 + line * 4; i += dirNum) {
+          let tile = tiles[i].text();
+          let secondaryTile = tiles[i + dirNum].text();
+
+          if (tile === secondaryTile) {
+            movesLeft++;
+          }
+        }
+
+        dirNum = 4;
+        for (let i = 0 + line; i < 12; i += dirNum) {
+          let tile = tiles[i].text();
+          let secondaryTile = tiles[i + dirNum].text();
+
+          if (tile === secondaryTile) {
+            movesLeft++;
+          }
+        }
+
+        dirNum = -4;
+        for (let i = 12 + line; i > 3; i += dirNum) {
+          let tile = tiles[i].text();
+          let secondaryTile = tiles[i + dirNum].text();
+
+          if (tile === secondaryTile) {
+            movesLeft++;
+          }
+        }
+      }
+    }
+
+    if (!movesLeft) {
+      console.log("Game Over");
+      gameOver = true;
+    }
+  }
+};
+
+const checkIfWon = () => {
+  tiles.forEach(function (tile) {
+    if (tile.text() === "2048") {
+      console.log("You Win!");
+      gameOver = true;
+    }
+  });
 };
 
 /* Captures keydown events */
