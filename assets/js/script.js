@@ -26,7 +26,6 @@ const generateNumber = () => {
   if (!tiles[randomNumber].text()) {
     tiles[randomNumber].text(2);
     tiles[randomNumber].addClass("number-tile _2-tile");
-    tiles[randomNumber].removeClass("empty-tile");
   } else {
     generateNumber();
   }
@@ -54,12 +53,47 @@ const keyPressed = (e) => {
   }
 };
 
-const leftMovHandler = () => {
-  console.log("Left");
-};
-
 const rightMovHandler = () => {
   console.log("Right");
+  /* Directional number: how the numbers need to be shifted */
+  const dirNum = -1;
+
+  for (let i = 3; i > 0; i--) {
+    let tile = tiles[i].text();
+    let sideTile = tiles[i - 1].text();
+
+    if (!tile) {
+      tile = sideTile;
+      sideTile = "";
+      if (tile) {
+        tiles[i].text(tile).addClass(`number-tile _${parseInt(tile)}-tile`);
+        tiles[i + dirNum]
+          .empty()
+          .removeClass(`number-tile _${parseInt(tile)}-tile`);
+      }
+    }
+  }
+};
+
+const leftMovHandler = () => {
+  console.log("Left");
+  const dirNum = 1;
+
+  for (let i = 0; i < 3; i++) {
+    let tile = tiles[i].text();
+    let sideTile = tiles[i + 1].text();
+
+    if (!tile) {
+      tile = sideTile;
+      sideTile = "";
+      if (tile) {
+        tiles[i].text(tile).addClass(`number-tile _${parseInt(tile)}-tile`);
+        tiles[i + dirNum]
+          .empty()
+          .removeClass(`number-tile _${parseInt(tile)}-tile`);
+      }
+    }
+  }
 };
 
 const upMovHandler = () => {
