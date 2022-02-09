@@ -57,7 +57,6 @@ const rightMovHandler = () => {
   console.log("Right");
   /* Directional number: how the numbers need to be shifted */
   const dirNum = -1;
-
   for (let i = 3; i > 0; i += dirNum) {
     let tile = tiles[i].text();
     let secondaryTile = tiles[i + dirNum].text();
@@ -66,8 +65,12 @@ const rightMovHandler = () => {
       tile = secondaryTile;
       secondaryTile = "";
       if (tile) {
-        emptyTileHandler(tile, i, dirNum);
+        emptyTile(tile, i, dirNum);
       }
+    } else if (tile === secondaryTile) {
+      tile = parseInt(tile) + parseInt(secondaryTile);
+      secondaryTile = "";
+      combineTiles(tile, i, dirNum);
     }
   }
 };
@@ -84,7 +87,7 @@ const leftMovHandler = () => {
       tile = secondaryTile;
       secondaryTile = "";
       if (tile) {
-        emptyTileHandler(tile, i, dirNum);
+        emptyTile(tile, i, dirNum);
       }
     }
   }
@@ -102,7 +105,7 @@ const upMovHandler = () => {
       tile = secondaryTile;
       secondaryTile = "";
       if (tile) {
-        emptyTileHandler(tile, i, dirNum);
+        emptyTile(tile, i, dirNum);
       }
     }
   }
@@ -120,18 +123,29 @@ const downMovHandler = () => {
       tile = secondaryTile;
       secondaryTile = "";
       if (tile) {
-        emptyTileHandler(tile, i, dirNum);
+        emptyTile(tile, i, dirNum);
       }
     }
   }
 };
 
-const emptyTileHandler = (tileContents, index, dirNum) => {
-  /* Assigns primary tile the number from the secondary tile and adds classes */
-  tiles[index].text(tileContents).addClass(`_${parseInt(tileContents)}-tile`);
+const emptyTile = (tileContents, index, dirNum) => {
+  /* Assigns primary tile the number from the secondary tile and adds a class */
+  tiles[index].text(tileContents).addClass(`_${tileContents}-tile`);
 
-  /* Empties the secondary tile and removes classes */
-  tiles[index + dirNum].empty().removeClass(`_${parseInt(tileContents)}-tile`);
+  /* Empties the secondary tile and removes class */
+  tiles[index + dirNum].empty().removeClass(`_${tileContents}-tile`);
+};
+
+const combineTiles = (tileContents, index, dirNum) => {
+  /* Combines the primary tile and the secondary tile and manages classes */
+  tiles[index]
+    .text(tileContents)
+    .addClass(`_${tileContents}-tile`)
+    .removeClass(`_${tileContents / 2}-tile`);
+
+  /* Empties the secondary tile and removes the class*/
+  tiles[index + dirNum].empty().removeClass(`_${tileContents / 2}-tile`);
 };
 
 /* Captures keydown events */
