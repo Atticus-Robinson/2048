@@ -25,7 +25,7 @@ const generateNumber = () => {
   randomNumber = Math.floor(Math.random() * tiles.length);
   if (!tiles[randomNumber].text()) {
     tiles[randomNumber].text(2);
-    tiles[randomNumber].addClass("number-tile _2-tile");
+    tiles[randomNumber].addClass("_2-tile");
   } else {
     generateNumber();
   }
@@ -66,10 +66,7 @@ const rightMovHandler = () => {
       tile = sideTile;
       sideTile = "";
       if (tile) {
-        tiles[i].text(tile).addClass(`number-tile _${parseInt(tile)}-tile`);
-        tiles[i + dirNum]
-          .empty()
-          .removeClass(`number-tile _${parseInt(tile)}-tile`);
+        emptyTileHandler(tile, i, dirNum);
       }
     }
   }
@@ -87,10 +84,7 @@ const leftMovHandler = () => {
       tile = sideTile;
       sideTile = "";
       if (tile) {
-        tiles[i].text(tile).addClass(`number-tile _${parseInt(tile)}-tile`);
-        tiles[i + dirNum]
-          .empty()
-          .removeClass(`number-tile _${parseInt(tile)}-tile`);
+        emptyTileHandler(tile, i, dirNum);
       }
     }
   }
@@ -102,6 +96,14 @@ const upMovHandler = () => {
 
 const downMovHandler = () => {
   console.log("Down");
+};
+
+const emptyTileHandler = (tileContents, index, dirNum) => {
+  /* Assigns primary tile the number from the secondary tile and adds classes */
+  tiles[index].text(tileContents).addClass(`_${parseInt(tileContents)}-tile`);
+
+  /* Empties the secondary tile and removes classes */
+  tiles[index + dirNum].empty().removeClass(`_${parseInt(tileContents)}-tile`);
 };
 
 /* Captures keydown events */

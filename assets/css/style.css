@@ -38,22 +38,17 @@ body {
   gap: 20px;
   flex-wrap: wrap;
   font-family: "Mukta", sans-serif;
-  /* temporary */
+  /* Temporary */
   background-color: antiquewhite;
 }
 
-.empty-tile {
+/* Merged empty and number tiles since the 
+background down the list takes precedence anyway */
+.tile {
   background-color: var(--stone);
   border-radius: 0.25rem;
   width: 125px;
   height: 125px;
-  z-index: 1;
-}
-
-.number-tile {
-  width: 125px;
-  height: 125px;
-  border-radius: 0.25rem;
   font-weight: 500;
   font-size: 50px;
   display: flex;
