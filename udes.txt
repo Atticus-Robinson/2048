@@ -1,0 +1,17 @@
+-start animation to full square, do calculations, then stop animation at certain time. computed position never changes just the visual
+-calculate animation time and ending point based on difference between locations
+
+-calculate all new values, store into array/object then run animations with data
+slide()
+-move tile
+	-calculate distance necessary
+	-move distance
+
+	-x or y to full x or y, stop at desired place
+	-desired place based on distance
+-fill new tile
+	-text [index]
+	-addClass (_2-tile)
+-clear old tile
+	-empty
+	-remove class _x-tile

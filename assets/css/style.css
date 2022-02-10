@@ -17,30 +17,33 @@ body {
   background-color: rgb(219, 225, 221);
 }
 
-.background,
+.score-container {
+  position: absolute;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
 .tile-container {
   box-sizing: border-box;
   height: 600px;
   width: 600px;
   border-radius: 0.25rem;
-  display: flex;
-  padding: 20px;
   flex-wrap: wrap;
-  position: absolute;
-  left: 25%;
-  top: 2%;
-  justify-content: space-evenly;
-  align-content: space-evenly;
-}
-
-.background {
+  position: relative;
   background-color: darkgray;
-  z-index: 1;
+  font-family: "Mukta", sans-serif;
 }
 
-.tile-container {
+.tile-under {
   z-index: 2;
-  font-family: "Mukta", sans-serif;
+  position: absolute;
+  background-color: rgb(227, 218, 201);
+  border-radius: 0.25rem;
+  width: 125px;
+  height: 125px;
 }
 
 .tile {
@@ -52,19 +55,43 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 4;
-  transition: transform 0.3s ease-in-out;
+  z-index: 3;
   color: aliceblue;
+  position: absolute;
 }
 
-.background-tile {
-  background-color: rgb(227, 218, 201);
-  border-radius: 0.25rem;
-  width: 125px;
+.row {
+  position: absolute;
   height: 125px;
-  z-index: 1;
+  width:560px;
 }
 
+.tile-under:nth-child(4n-3) {
+  left: 20px;
+}
+.tile-under:nth-child(4n-2) {
+  left: 165px;
+}
+.tile-under:nth-child(4n-1) {
+  right: 125px;
+}
+.tile-under:nth-child(4n) {
+  right: -20px;
+}
+
+.row:nth-child(4n-3) {
+  top: 20px;
+}
+.row:nth-child(4n-2) {
+  top: 165px;
+}
+.row:nth-child(4n-1) {
+  bottom: 165px;
+}
+.row:nth-child(4n) {
+  bottom: 20px;
+}
+ 
 ._2-tile {
   background-color: var(--yellow);
   color: black;

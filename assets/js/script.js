@@ -4,16 +4,12 @@ const tileEl = $(".tile");
 
 /* An array to hold the tiles */
 const tiles = [];
-const grid = [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-];
 /* Keeps track of whether a move happened */
 let moved = 0;
 /* Keeps track of game state */
 let gameOver = false;
+
+
 
 /* Starts the game and generates two starting numbers */
 const startGame = () => {
@@ -41,7 +37,7 @@ const generateNumber = () => {
     let number = numbers[Math.floor(Math.random() * 10)];
     /* Adds the number to the tile */
     tiles[randomNumber].text(number);
-    tiles[randomNumber].addClass(`_${number}-tile`);
+    tiles[randomNumber].addClass(`_${number}-tile number-tile`);
   } else {
     generateNumber();
   }
@@ -51,6 +47,7 @@ const generateNumber = () => {
 /* 37 = ArrowLeft, 38 = ArrowUp, 39 = ArrowRight, 40 = ArrowDown */
 const keyPressed = (e) => {
   /* Checks and handles the game being over */
+  event.preventDefault();
   if (gameOver) {
     let score = 0;
 
@@ -248,16 +245,14 @@ const downMovHandler = () => {
 };
 
 const emptyTile = (tileContents, index, dirNum) => {
-  slide(i, dirNum)
-  console.log("empty run");
   /* Assigns primary tile the number from the secondary tile and adds a class */
   tiles[index]
     .attr("id", index)
     .text(tileContents)
-    .addClass(`_${tileContents}-tile`);
+    .addClass(`_${tileContents}-tile number-tile`);
 
   /* Empties the secondary tile and removes class */
-  tiles[index + dirNum].empty().removeClass(`_${tileContents}-tile`);
+  tiles[index + dirNum].empty().removeClass(`_${tileContents}-tile number-tile`);
 
   moved++;
 };
@@ -266,7 +261,7 @@ const combineTiles = (tileContents, index, dirNum) => {
   /* Combines the primary tile and the secondary tile and manages classes */
   tiles[index]
     .text(tileContents)
-    .addClass(`_${tileContents}-tile locked`)
+    .addClass(`_${tileContents}-tile number-tile locked`)
     .removeClass(`_${tileContents / 2}-tile`);
 
   /* Empties the secondary tile and removes the class*/
@@ -346,26 +341,15 @@ const checkIfWon = () => {
   });
 };
 
-let slide = async(index, dirNum) => {
-  console.log("slide run");
-  let from = index + dirNum;
-  let item = $(tiles)[index];
-  let [x, y] = [0, 0];
-  if (Math.abs(dirNum) == 4) {
-    y = dirNum * -34.25;
-  } else if (Math.abs(dirNum) == 1) {
-    x = dirNum * -137;
-  }
-  console.log(x, y);
-  $(item).transition({ x: `${x}px`, y: `${y}px` });
-};
-
 /* Captures keydown events */
 $(window).on("keydown", keyPressed);
 
 $("#test-animation").on("click", function () {
-  $(".tile").transition({ y: "137px" });
-});
+  $('.number-tile').animate({
+
+  })
+})
+
 
 /* Launches the game on load */
 startGame();
